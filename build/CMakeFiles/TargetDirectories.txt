@@ -1,0 +1,5 @@
+/home/quantum/IIoT_MMT/build/CMakeFiles/pqc_kem.dir
+/home/quantum/IIoT_MMT/build/CMakeFiles/kem_test.dir
+/home/quantum/IIoT_MMT/build/CMakeFiles/main_app.dir
+/home/quantum/IIoT_MMT/build/CMakeFiles/edit_cache.dir
+/home/quantum/IIoT_MMT/build/CMakeFiles/rebuild_cache.dir

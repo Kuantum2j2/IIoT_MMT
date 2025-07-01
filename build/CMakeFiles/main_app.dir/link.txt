@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/main_app.dir/src/app/main.c.o -o /home/quantum/IIoT_MMT/scripts/main_app  libpqc_kem.a -loqs -lcrypto 

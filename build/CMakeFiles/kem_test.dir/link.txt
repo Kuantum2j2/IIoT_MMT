@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/kem_test.dir/scripts/kem_test.c.o -o /home/quantum/IIoT_MMT/scripts/kem_test  libpqc_kem.a -loqs -lcrypto 

@@ -1,0 +1,2 @@
+/usr/bin/ar qc libpqc_kem.a CMakeFiles/pqc_kem.dir/src/pqc_kem/pqc_kem.c.o
+/usr/bin/ranlib libpqc_kem.a
