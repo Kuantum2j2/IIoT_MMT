@@ -1,0 +1,9 @@
+build/
+*.o
+*.a
+*.so
+openssl-1.1.1u.tar.gz
+*.crt
+*.key
+*.swp
+.DS_Store
