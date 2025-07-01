@@ -1,45 +1,56 @@
-# 1. Navigate to the project root
-cd ~/IIoT_MMT
+# Navigate to the liboqs folder
+cd ~/IIoT_MMT/liboqs
 
-# 2. Create and enter the build directory
+# Create and enter a build directory
 mkdir -p build && cd build
 
-# 3. Configure the project with CMake
+# Configure and install
+cmake -DCMAKE_INSTALL_PREFIX=/usr/local ..
+make -j$(nproc)
+sudo make install
+
+# Navigate to the OpenSSL-1.1 folder
+cd ~/IIoT_MMT/openssl-1.1
+
+# Configure and build
+./config --prefix=/usr/local/openssl-1.1 shared enable-dso
+make -j$(nproc)
+sudo make install
+
+# Add OpenSSL-1.1 to your PATH
+export PATH=/usr/local/openssl-1.1/bin:$PATH
+
+# Navigate to project root
+cd ~/IIoT_MMT
+
+# Create and enter build directory
+mkdir -p build && cd build
+
+# Configure project
 cmake ..
 
-# 4. Compile using all available CPU cores
+# Compile using all CPU cores
 make -j$(nproc)
 
-# 5. After a successful build, the binaries will be located at:
-#    - kem_test   in ../scripts/kem_test
-#    - main_app   in ../scripts/main_app
+# Binaries produced:
+#   - kem_test  at ../scripts/kem_test
+#   - main_app  at ../scripts/main_app
 
+# Change to scripts directory
 cd ~/IIoT_MMT/scripts
+
+# Run benchmark
 ./kem_test
-# Output:
-# KeyGen: <time> ms
-# Encaps: <time> ms
-# Decaps: <time> ms
+# Sample output:
+# KeyGen: 1.234 ms
+# Encaps: 0.678 ms
+# Decaps: 0.456 ms
 # Shared OK: yes
 
-cd ~/IIoT_MMT/scripts
+# In the same scripts directory
 ./main_app
-# Output:
+# Sample output:
 # [*] Generating PQC KEM keypair...
 # [*] Encapsulating...
 # [*] Decapsulating...
 # Shared secret match!
-
-# On MMT-PC (server):
-openssl s_server \
-  -accept 8443 \
-  -cert ~/IIoT_MMT/certs/server_mmt.crt \
-  -key  ~/IIoT_MMT/certs/server_mmt.key \
-  -ciphersuites TLS_AES_256_GCM_SHA384_KYBER_768 \
-  -provider base -provider oqsprovider -www
-
-# On SOC-PC (client):
-openssl s_client \
-  -connect <MMT-PC-IP>:8443 \
-  -ciphersuites TLS_AES_256_GCM_SHA384_KYBER_768 \
-  -provider oqsprovider
